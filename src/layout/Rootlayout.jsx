@@ -23,7 +23,15 @@ const Rootlayout = () => {
 				<footer className='p-6 text-center border-t border-border bg-card/10 backdrop-blur-md rounded-t-xl'>
 					<p className='text-sm text-muted-foreground'>
 						Designed and Developed by{" "}
-						<span className='text-primary font-semibold'>Arin Mandal</span>
+						<span className='text-primary font-semibold'>
+							<a
+								href='https://github.com/arinmandal'
+								target='_blank'
+								rel='noopener noreferrer'
+								aria-label="Visit Arin Mandal's GitHub profile">
+								Arin Mandal
+							</a>
+						</span>
 					</p>
 				</footer>
 			</div>
