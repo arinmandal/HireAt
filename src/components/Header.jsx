@@ -8,6 +8,7 @@ import {
 	SignIn,
 	SignInButton,
 	UserButton,
+	useUser,
 } from "@clerk/clerk-react";
 import { BriefcaseBusinessIcon, PenBox, Heart } from "lucide-react";
 
@@ -16,6 +17,9 @@ const Header = () => {
 
 	// if user has not login currently we connect them to homepage with search params
 	const [search, setSearch] = useSearchParams();
+
+	const { user } = useUser();
+
 
 	useEffect(() => {
 		if (search.get("sign-in")) {
@@ -50,13 +54,16 @@ const Header = () => {
 
 					<SignedIn>
 						{/* Show this button when recuiter login */}
+						{user?.unsafeMetadata?.role === 'recruiter' && (
+							<Link to='/post-jobs'>
+								<Button variant='blue' className='rounded-full'>
+									<PenBox size={20} className='mr-2' />
+									Post a job
+								</Button>
+							</Link>
 
-						<Link to='/post-jobs'>
-							<Button variant='blue' className='rounded-full'>
-								<PenBox size={20} className='mr-2' />
-								Post a job
-							</Button>
-						</Link>
+						)}
+
 						<UserButton
 							appearance={{
 								elements: {

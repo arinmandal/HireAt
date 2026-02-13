@@ -24,14 +24,14 @@ const HomePage = () => {
 			<section className='text-center'>
 				<h1 className='flex flex-col items-center justify-center text-4xl font-extrabold sm:text-6xl lg:text-8xl tracking-tighter py-4 gradient-title'>
 					Find Your Dream Job
-					<Logo className=''/>
+					<Logo className='' />
 				</h1>
 				<p className='text-gray-300 sm:mt-4 text-xs sm:text-xl'>
 					Explore thousands of job listings or find the perfect candidate
 				</p>
 			</section>
 			<div className='flex flex-wrap gap-3 sm:gap-6 justify-center w-full px-4'>
-				<Link to='/joblisting'>
+				<Link to='/jobs'>
 					<Button variant='teal' size='xl'>
 						Find Jobs
 					</Button>
