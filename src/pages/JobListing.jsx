@@ -1,36 +1,66 @@
-import { getJobs } from '@/api/jobs'
-import { useSession } from '@clerk/clerk-react'
-import React, { useEffect, useState } from 'react'
+import { getJobs } from "@/api/jobs";
+import useFetch from "@/hooks/useFetch";
+import { useUser } from "@clerk/clerk-react";
+import { useEffect, useState } from "react";
+import { BarLoader } from 'react-spinners'
+import Jobs from "./Jobs";
+import JobCards from "@/components/JobCards";
 
 const JobListing = () => {
-  const { session } = useSession();
+
+	const [searchQuery, setSearchQuery] = useState("");
+	const [location, setLocation] = useState("");
+	const [company_id, setCompany_id] = useState("");
 
 
-  useEffect(() => {
-    const fetchJobs = async () => {
-      if (!session) return;
+	const { isLoaded } = useUser();
 
-      try {
-        const supabaseAccessToken = await session.getToken({
-          template: 'supabase'
-        });
+	const { fn: fnJobs, data: jobs, loading: loadingJobs } = useFetch(getJobs, { location, company_id, searchQuery })
 
-        const data = await getJobs(supabaseAccessToken);
-        console.log(data)
-      } catch (error) {
-        console.error('Error fetching jobs:', error);
-      }
-    };
+	useEffect(() => {
+		if (isLoaded) fnJobs({ location, company_id, searchQuery })
+	}, [isLoaded, location, company_id, searchQuery])
 
-    fetchJobs();
-  }, []);
+	if (!isLoaded) {
+		return <BarLoader className='mb-4' width={"100%"} color='#4a5cff' />
+	}
 
 
-  return (
-    <div>
-      <h1>Job Listing</h1>
-    </div>
-  )
-}
+	return (
+		<div>
+			<h1 className="gradient-title font-extrabold text-6xl sm:text-7xl text-center pb-8">Latest Jobs</h1>
 
-export default JobListing
+			{/* filters jobs */}
+
+			{/* loading jobs */}
+
+			{
+				loadingJobs && (
+					<BarLoader className='mb-4' width={"100%"} color='#4a5cff' />
+				)
+			}
+
+
+			{
+				loadingJobs === false && (
+					<div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+						{jobs?.length ? (
+							jobs.map((job, index) => {
+								return <JobCards key={job.id} job={job} 
+								savedInit={job?.saved?.length > 0}
+								/>
+							})
+						) : (
+							<div>
+								No Jobs Found 🥲
+							</div>
+						)}
+					</div>
+				)
+			}
+
+		</div>
+	);
+};
+
+export default JobListing;
