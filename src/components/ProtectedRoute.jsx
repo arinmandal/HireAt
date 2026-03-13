@@ -3,22 +3,22 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
-	const { isSignedIn, user, isLoaded } = useUser();
-	const { pathname } = window.location;
+  const { isSignedIn, user, isLoaded } = useUser();
+  const { pathname } = window.location;
 
-	if (isLoaded && !isSignedIn && isSignedIn !== undefined) {
-		return <Navigate to="/?sign-in=true" />;
-	}
+  if (isLoaded && !isSignedIn && isSignedIn !== undefined) {
+    return <Navigate to="/?sign-in=true" />;
+  }
 
+  if (
+    user !== undefined &&
+    !user?.unsafeMetadata?.role &&
+    pathname !== "/onboarding"
+  ) {
+    return <Navigate to="/onboarding" />;
+  }
 
-
-	if (user !== undefined && !user?.unsafeMetadata?.role && pathname !== "/onboarding"
-	) {
-		return <Navigate to="/onboarding" />
-	}
-
-
-	return children;
+  return children;
 };
 
 export default ProtectedRoute;
