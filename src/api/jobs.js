@@ -61,3 +61,24 @@ export async function savedJob(sessionToken, { alreadySaved }, savedData) {
     }
 
 }
+
+
+// Get single jobs
+export async function getSingleJob(sessionToken, {job_id}) {
+    const supabase = createClerkSupabaseClient(sessionToken);
+
+    const {data, error} = await supabase.from("jobs")
+    .select("*, company:companies(name, logo_url), applications: applications(*)")
+    .eq("id", job_id)
+    .single();
+
+    if(error){
+        console.error('Error Fetching Jobs', error);
+        return null;
+    }
+
+    return data;
+    
+}
+
+
