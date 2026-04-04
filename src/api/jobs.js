@@ -82,3 +82,23 @@ export async function getSingleJob(sessionToken, {job_id}) {
 }
 
 
+
+// Update hiring status
+export async function updateHiringStatus(sessionToken, {job_id}, isOpen) {
+    const supabase = createClerkSupabaseClient(sessionToken);
+
+    const {data, error} = await supabase.from("jobs")
+    .update({isOpen})
+    .eq("id", job_id)
+    .select();
+
+    if(error){
+        console.error('Error Updating Job', error);
+        return null;
+    }
+
+    return data;
+    
+}
+
+
