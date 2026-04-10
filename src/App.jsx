@@ -29,7 +29,7 @@ const App = () => {
 					),
 				},
 				{
-					path: "/joblisting",
+					path: "/jobs",
 					element: (
 						<ProtectedRoute>
 							<JobListing />
