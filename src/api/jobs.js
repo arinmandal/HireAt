@@ -21,7 +21,7 @@ export async function getJobs(sessionToken, { location, company_id, searchQuery 
 
     if (error) {
         console.error('Error while fetching Jobs:', error);
-        return null;
+        throw new Error('Error fetching jobs');
     }
 
     return data;
@@ -43,7 +43,7 @@ export async function savedJob(sessionToken, { alreadySaved }, savedData) {
 
         if (deleteError) {
             console.error("Error Deleting Saved Job:", deleteError);
-            return null;
+            throw new Error('Error removing saved job');
         }
 
         return data;
@@ -54,8 +54,8 @@ export async function savedJob(sessionToken, { alreadySaved }, savedData) {
             .select();
 
         if (insertError) {
-            console.error('Error while fetching Jobs:', insertError);
-            return null;
+            console.error('Error saving job:', insertError);
+            throw new Error('Error saving job');
         }
         return data;
     }
@@ -74,7 +74,7 @@ export async function getSingleJob(sessionToken, {job_id}) {
 
     if(error){
         console.error('Error Fetching Jobs', error);
-        return null;
+        throw new Error('Error fetching job details');
     }
 
     return data;
@@ -94,7 +94,7 @@ export async function updateHiringStatus(sessionToken, {job_id}, isOpen) {
 
     if(error){
         console.error('Error Updating Job', error);
-        return null;
+        throw new Error('Error updating hiring status');
     }
 
     return data;
