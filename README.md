@@ -12,6 +12,7 @@
 [![Clerk](https://img.shields.io/badge/Auth-Clerk-6C47FF?logo=clerk&logoColor=white)](https://clerk.com)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-hireat.vercel.app-000000?logo=vercel&logoColor=white)](https://hireat.vercel.app/)
 
 </div>
 
@@ -19,6 +20,7 @@
 
 ## 📋 Table of Contents
 
+- [Live Demo](#live-demo)
 - [About](#about)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
@@ -29,6 +31,12 @@
 - [Getting Started](#getting-started)
 - [Environment Variables](#environment-variables)
 - [Scripts](#scripts)
+
+---
+
+## Live Demo
+
+🚀 **[https://hireat.vercel.app/](https://hireat.vercel.app/)**
 
 ---
 
@@ -46,12 +54,14 @@ Built with React 19, Vite 7, Supabase (PostgreSQL + Storage), and Clerk for auth
 ## Features
 
 ### For Candidates
+
 - 🔍 **Job Discovery** — Browse all open job listings with search by keyword, filter by location, and filter by company.
 - ❤️ **Save Jobs** — Bookmark jobs to a personal saved list with real-time heart-toggle UI.
 - 📄 **Apply to Jobs** — Submit applications with name, experience level, education, skills, and a resume PDF upload to Supabase Storage.
 - 📋 **My Applications** — View a chronological list of all submitted applications with company and job title, and current status badge.
 
 ### For Recruiters
+
 - ➕ **Post Jobs** — Create job listings with title, description, salary, location (country/city picker), and markdown-formatted requirements.
 - 🏢 **Add Company** — Create a company profile with logo upload directly to Supabase Storage via an in-drawer form.
 - 🚦 **Hiring Status Toggle** — Open or close a job listing directly from the job detail page.
@@ -60,6 +70,7 @@ Built with React 19, Vite 7, Supabase (PostgreSQL + Storage), and Clerk for auth
 - ✅ **Update Application Status** — Change candidate status (Applied / Interviewing / Hired / Rejected) per application card.
 
 ### General
+
 - 🔐 **Authentication** — Sign in via Clerk with Google / Email; onboarding flow assigns roles (Candidate / Recruiter).
 - 🌙 **Dark Mode** — Default dark theme with ThemeProvider context.
 - ⚡ **Loading States** — `BarLoader` spinners on every async operation via a unified `useFetch` hook.
@@ -69,22 +80,22 @@ Built with React 19, Vite 7, Supabase (PostgreSQL + Storage), and Clerk for auth
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| **Framework** | [React 19](https://react.dev) |
-| **Build Tool** | [Vite 7](https://vite.dev) |
-| **Routing** | [React Router v7](https://reactrouter.com) |
-| **Styling** | [Tailwind CSS v4](https://tailwindcss.com) |
-| **UI Components** | [shadcn/ui](https://ui.shadcn.com) + [Radix UI](https://radix-ui.com) |
-| **Authentication** | [Clerk](https://clerk.com) (`@clerk/clerk-react`) |
-| **Database & Storage** | [Supabase](https://supabase.io) (PostgreSQL + Storage Buckets) |
-| **Form Handling** | [React Hook Form](https://react-hook-form.com) + [Zod](https://zod.dev) |
-| **Markdown Editor** | [@uiw/react-md-editor](https://github.com/uiwjs/react-md-editor) |
-| **Carousel** | [Embla Carousel](https://www.embla-carousel.com) |
-| **Icons** | [Lucide React](https://lucide.dev) |
-| **Loading Spinners** | [react-spinners](https://www.davidhu.io/react-spinners) |
-| **Location Data** | [country-state-city](https://github.com/harpreetkhalsagtbit/country-state-city) |
-| **Linting** | ESLint 9 + eslint-plugin-react-hooks |
+| Layer                  | Technology                                                                      |
+| ---------------------- | ------------------------------------------------------------------------------- |
+| **Framework**          | [React 19](https://react.dev)                                                   |
+| **Build Tool**         | [Vite 7](https://vite.dev)                                                      |
+| **Routing**            | [React Router v7](https://reactrouter.com)                                      |
+| **Styling**            | [Tailwind CSS v4](https://tailwindcss.com)                                      |
+| **UI Components**      | [shadcn/ui](https://ui.shadcn.com) + [Radix UI](https://radix-ui.com)           |
+| **Authentication**     | [Clerk](https://clerk.com) (`@clerk/clerk-react`)                               |
+| **Database & Storage** | [Supabase](https://supabase.io) (PostgreSQL + Storage Buckets)                  |
+| **Form Handling**      | [React Hook Form](https://react-hook-form.com) + [Zod](https://zod.dev)         |
+| **Markdown Editor**    | [@uiw/react-md-editor](https://github.com/uiwjs/react-md-editor)                |
+| **Carousel**           | [Embla Carousel](https://www.embla-carousel.com)                                |
+| **Icons**              | [Lucide React](https://lucide.dev)                                              |
+| **Loading Spinners**   | [react-spinners](https://www.davidhu.io/react-spinners)                         |
+| **Location Data**      | [country-state-city](https://github.com/harpreetkhalsagtbit/country-state-city) |
+| **Linting**            | ESLint 9 + eslint-plugin-react-hooks                                            |
 
 ---
 
@@ -197,50 +208,55 @@ Sign Up / Sign In (Clerk)
 ## Database Schema
 
 ### `companies`
-| Column | Type | Notes |
-|---|---|---|
-| `id` | uuid | PK |
-| `name` | text | Company name |
+
+| Column     | Type | Notes                |
+| ---------- | ---- | -------------------- |
+| `id`       | uuid | PK                   |
+| `name`     | text | Company name         |
 | `logo_url` | text | Supabase Storage URL |
 
 ### `jobs`
-| Column | Type | Notes |
-|---|---|---|
-| `id` | uuid | PK |
-| `title` | text | Job title |
-| `description` | text | Short description |
-| `requirements` | text | Markdown-formatted requirements |
-| `location` | text | City / State |
-| `salary` | text | Salary range |
-| `isOpen` | boolean | Hiring status |
-| `recruiter_id` | text | Clerk user ID of the poster |
-| `company_id` | uuid | FK → `companies.id` |
+
+| Column         | Type    | Notes                           |
+| -------------- | ------- | ------------------------------- |
+| `id`           | uuid    | PK                              |
+| `title`        | text    | Job title                       |
+| `description`  | text    | Short description               |
+| `requirements` | text    | Markdown-formatted requirements |
+| `location`     | text    | City / State                    |
+| `salary`       | text    | Salary range                    |
+| `isOpen`       | boolean | Hiring status                   |
+| `recruiter_id` | text    | Clerk user ID of the poster     |
+| `company_id`   | uuid    | FK → `companies.id`             |
 
 ### `saved_jobs`
-| Column | Type | Notes |
-|---|---|---|
-| `id` | uuid | PK |
-| `job_id` | uuid | FK → `jobs.id` |
-| `user_id` | text | Clerk user ID |
+
+| Column    | Type | Notes          |
+| --------- | ---- | -------------- |
+| `id`      | uuid | PK             |
+| `job_id`  | uuid | FK → `jobs.id` |
+| `user_id` | text | Clerk user ID  |
 
 ### `applications`
-| Column | Type | Notes |
-|---|---|---|
-| `id` | uuid | PK |
-| `job_id` | uuid | FK → `jobs.id` |
-| `candidate_id` | text | Clerk user ID of the applicant |
-| `name` | text | Applicant's name |
-| `status` | text | `applied` / `interviewing` / `hired` / `rejected` |
-| `experience` | text | Experience level |
-| `education` | text | Highest education |
-| `skills` | text | Comma-separated skills |
-| `resume` | text | Supabase Storage public URL |
+
+| Column         | Type | Notes                                             |
+| -------------- | ---- | ------------------------------------------------- |
+| `id`           | uuid | PK                                                |
+| `job_id`       | uuid | FK → `jobs.id`                                    |
+| `candidate_id` | text | Clerk user ID of the applicant                    |
+| `name`         | text | Applicant's name                                  |
+| `status`       | text | `applied` / `interviewing` / `hired` / `rejected` |
+| `experience`   | text | Experience level                                  |
+| `education`    | text | Highest education                                 |
+| `skills`       | text | Comma-separated skills                            |
+| `resume`       | text | Supabase Storage public URL                       |
 
 ### Supabase Storage Buckets
-| Bucket | Contents |
-|---|---|
-| `resumes` | Uploaded candidate resume PDFs |
-| `company_logo` | Uploaded company logo images |
+
+| Bucket         | Contents                       |
+| -------------- | ------------------------------ |
+| `resumes`      | Uploaded candidate resume PDFs |
+| `company_logo` | Uploaded company logo images   |
 
 ---
 
@@ -248,27 +264,28 @@ Sign Up / Sign In (Clerk)
 
 All tables use Row Level Security. The Clerk JWT is forwarded as a Bearer token via the custom Supabase client.
 
-| Table | Operation | Policy |
-|---|---|---|
-| `jobs` | SELECT | Authenticated users can read all open jobs |
-| `jobs` | INSERT | `recruiter_id = auth.uid()` |
-| `jobs` | UPDATE | `recruiter_id = auth.uid()` |
-| `jobs` | DELETE | `recruiter_id = auth.uid()` |
-| `saved_jobs` | SELECT | `user_id = auth.uid()` |
-| `saved_jobs` | INSERT | `user_id = auth.uid()` |
-| `saved_jobs` | DELETE | `user_id = auth.uid()` |
+| Table          | Operation          | Policy                                           |
+| -------------- | ------------------ | ------------------------------------------------ |
+| `jobs`         | SELECT             | Authenticated users can read all open jobs       |
+| `jobs`         | INSERT             | `recruiter_id = auth.uid()`                      |
+| `jobs`         | UPDATE             | `recruiter_id = auth.uid()`                      |
+| `jobs`         | DELETE             | `recruiter_id = auth.uid()`                      |
+| `saved_jobs`   | SELECT             | `user_id = auth.uid()`                           |
+| `saved_jobs`   | INSERT             | `user_id = auth.uid()`                           |
+| `saved_jobs`   | DELETE             | `user_id = auth.uid()`                           |
 | `applications` | SELECT (recruiter) | Via joined job where `recruiter_id = auth.uid()` |
-| `applications` | SELECT (candidate) | `candidate_id = auth.uid()` |
-| `applications` | INSERT | `candidate_id = auth.uid()` |
-| `applications` | UPDATE | Via joined job where `recruiter_id = auth.uid()` |
-| `companies` | SELECT | All authenticated users |
-| `companies` | INSERT | Authenticated recruiters |
+| `applications` | SELECT (candidate) | `candidate_id = auth.uid()`                      |
+| `applications` | INSERT             | `candidate_id = auth.uid()`                      |
+| `applications` | UPDATE             | Via joined job where `recruiter_id = auth.uid()` |
+| `companies`    | SELECT             | All authenticated users                          |
+| `companies`    | INSERT             | Authenticated recruiters                         |
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 18+
 - A [Supabase](https://supabase.io) project with the schema above
 - A [Clerk](https://clerk.com) application with JWT template configured for Supabase
@@ -313,12 +330,12 @@ VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=eyJ...
 
 ## Scripts
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start development server with HMR |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint across the codebase |
+| Command           | Description                       |
+| ----------------- | --------------------------------- |
+| `npm run dev`     | Start development server with HMR |
+| `npm run build`   | Build for production              |
+| `npm run preview` | Preview production build locally  |
+| `npm run lint`    | Run ESLint across the codebase    |
 
 ---
 
