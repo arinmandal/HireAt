@@ -65,3 +65,20 @@ export async function updateApplications(sessionToken, { id }, status) {
 
   return data;
 }
+
+// Get Application
+export async function getApplications(sessionToken, { user_id }) {
+  const supabase = createClerkSupabaseClient(sessionToken);
+
+  const { data, error } = await supabase
+    .from("applications")
+    .select("*, job:jobs(title, company:companies(name))")
+    .eq("candidate_id", user_id);
+
+  if (error) {
+    console.error("Error Fetching Applications", error);
+    return null;
+  }
+
+  return data;
+}
